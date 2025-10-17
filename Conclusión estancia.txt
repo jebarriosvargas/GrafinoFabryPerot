@@ -1,0 +1,18 @@
+﻿Conclusión 
+
+
+El modelo implementado buscó construir y simular un sistema tipo Fabry–Pérot basado en una red de grafino alfa mediante un formalismo de tight-binding dependiente del tiempo en kwant y tkwant. Esta estructura, caracterizada por su compleja disposición de subredes (producto de la inserción periódica de átomos de carbono sp entre los enlaces sp²–sp² del grafeno) presenta una geometría no trivial con múltiples sitios por celda y conectividades del tipo “tres-dos-uno”, propias de los enlaces simples, dobles y triples del grafino.
+A pesar de definirse correctamente las subredes, los hoppings y los potenciales locales, las pruebas realizadas evidenciaron fallos persistentes en la construcción y diagnóstico de los leads.
+Indican que las celdas periódicas de los leads no pudieron determinarse correctamente, impidiendo el cálculo de los modos propagantes necesarios para iniciar la simulación temporal.
+El colapso del entorno de ejecución y los tiempos de cómputo excesivos (superiores a diez minutos antes del fallo) refuerzan esta conclusión: el sistema o los leads generados alcanzan un tamaño numérico prohibitivo o presentan una estructura topológicamente mal definida desde el punto de vista de la periodicidad. En otras palabras, los vectores de traslación aplicados a la red general del grafino no producen una celda base unidimensional coherente, lo que impide que kwant identifique correctamente las regiones repetitivas de los leads y, en consecuencia, que tkwant pueda resolver el problema de eigenvalores requerido por las rutinas lead.modes() y State(). En síntesis, la simulación no puede llevarse a cabo porque los leads del sistema de grafino alfa carecen de una celda periódica bien definida y acoplable a la región central, la dimensionalidad efectiva del lead es superior a la que tkwant puede manejar en su formalismo unidimensional para transporte, y la complejidad geométrica del grafino alfa, con múltiples sublattices y conexiones no ortogonales, dificulta definir una dirección de transporte translacional simple, requisito indispensable para el correcto funcionamiento de tkwant.
+
+
+Errores frecuentes:
+
+
+
+
+1. error: (lrwork>=max(24*n,1)||lrwork==-1) failed for 10th keyword lrwork: zheevr:lrwork=1
+
+
+2. AttributeError: 'InfiniteSystem' object has no attribute 'cell'
